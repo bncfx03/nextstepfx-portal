@@ -24,13 +24,14 @@ const accessDeniedHTML = `
 <head>
   <title>NextStepFX Portal</title>
   <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 80px;
-    }
+body {
+  background-color: #ffffff; /* Light background instead of black */
+  color: #000;
+  font-family: sans-serif;
+  text-align: center;
+  padding-top: 80px;
+}
+
     img {
       width: 200px;
       margin-bottom: 40px;
