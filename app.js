@@ -22,7 +22,7 @@ const accessDeniedHTML = `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NextStepFX Portal</title>
+  <title>NextStepFXAcademy - Portal</title>
   <style>
     body {
       background-color: #000;
@@ -50,7 +50,7 @@ const accessDeniedHTML = `
   </style>
 </head>
 <body>
-  <img src="/logo.png" alt="NextStepFX Logo">
+  <img src="https://nextstepfxacademy.com/portal/public/logo.png" alt="NextStepFXAcademy Logo">
   <h1>Access Denied</h1>
   <p>You must be a member to access this portal.</p>
   <a href="/login" class="login">Login with Patreon</a>
