@@ -22,56 +22,55 @@ const accessDeniedHTML = `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NextStepFX Portal</title>
+  <title>NextStepFXAcademy Portal</title>
   <style>
-body {
-  background-color: #ffffff; /* Light background instead of black */
-  color: #000;
-  font-family: sans-serif;
-  text-align: center;
-  padding-top: 80px;
-}
-
+    body {
+      background-color: #ffffff;
+      color: #000;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
     img {
       width: 200px;
       margin-bottom: 40px;
     }
     a.login {
-  display: inline-block;
-  margin-top: 20px;
-  background: #000;
-  color: #fff;
-  padding: 10px 20px;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-a.login:hover {
-  background: #71e9df;
-  color: #000;
-}
+      display: inline-block;
+      margin-top: 20px;
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    a.login:hover {
+      background: #71e9df;
+      color: #000;
+    }
   </style>
 </head>
 <body>
-  <img src="/logo.png" alt="NextStepFX Logo">
+  <img src="/logo.png" alt="NextStepFXAcademy Logo">
   <h1>Access Denied</h1>
-  <p>You must be a member to access this portal.</p>
+  <p>You must have an active <strong>NextStep Premium Access</strong> membership to use this portal.</p>
   <a href="/login" class="login">Login with Patreon</a>
 </body>
 </html>
 `;
 
-// Logged-in Portal Page
+// Logged-in Dashboard Page
 const portalHTML = `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NextStepFX Academy Portal</title>
+  <title>NextStepFXAcademy Portal</title>
   <style>
     body {
       background-color: #ffffff;
-      color: #000000;
+      color: #000;
       font-family: 'Arial', sans-serif;
       text-align: center;
       padding: 30px;
@@ -121,21 +120,20 @@ const portalHTML = `
   </style>
 </head>
 <body>
-  <img src="/logo.png" alt="NextStepFX Logo">
-  <h1>Welcome back, trader!</h1>
+  <img src="/logo.png" alt="NextStepFXAcademy Logo">
+  <h1>Welcome to NextStepFXAcademy!</h1>
 
   <div class="dashboard">
     <a href="/courses" class="card">📚 Courses</a>
     <a href="/downloads" class="card">📥 Downloads</a>
-    <a href="#" class="card">💬 Support</a>
-    <a href="#" class="card">⚙️ My Account</a>
+    <a href="/support" class="card">💬 Support</a>
+    <a href="/account" class="card">⚙️ My Account</a>
   </div>
 
   <a href="/logout" class="logout">Logout</a>
 </body>
 </html>
 `;
-
 
 app.get('/', (req, res) => {
   if (req.session.isPatron) {
@@ -173,48 +171,43 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+// Protected Pages
+const generateSimplePage = (title, message) => `
+<html>
+<head>
+  <title>${title} | NextStepFXAcademy</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #ffffff; color: #000; text-align: center; }
+    a { display: inline-block; margin-top: 20px; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+    a:hover { background: #71e9df; color: #000; }
+  </style>
+</head>
+<body>
+  <h1>${message}</h1>
+  <a href="/">← Back to Dashboard</a>
+</body>
+</html>
+`;
+
 app.get('/courses', (req, res) => {
   if (!req.session.isPatron) return res.redirect('/');
-  res.send(`
-    <html>
-    <head>
-      <title>Courses | NextStepFX</title>
-      <style>
-        body { font-family: sans-serif; padding: 40px; background: #fff; color: #000; text-align: center; }
-        a { display: inline-block; margin-top: 20px; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
-        a:hover { background: #71e9df; color: #000; }
-      </style>
-    </head>
-    <body>
-      <h1>📚 Courses</h1>
-      <p>This is where your video lessons will go.</p>
-      <a href="/">← Back to Dashboard</a>
-    </body>
-    </html>
-  `);
+  res.send(generateSimplePage('Courses', '📚 Your Courses Area Coming Soon'));
 });
 
 app.get('/downloads', (req, res) => {
   if (!req.session.isPatron) return res.redirect('/');
-  res.send(`
-    <html>
-    <head>
-      <title>Downloads | NextStepFX</title>
-      <style>
-        body { font-family: sans-serif; padding: 40px; background: #fff; color: #000; text-align: center; }
-        a { display: inline-block; margin-top: 20px; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
-        a:hover { background: #71e9df; color: #000; }
-      </style>
-    </head>
-    <body>
-      <h1>📥 Downloads</h1>
-      <p>Place your strategy PDFs, trading tools, or bonus content here.</p>
-      <a href="/">← Back to Dashboard</a>
-    </body>
-    </html>
-  `);
+  res.send(generateSimplePage('Downloads', '📥 Download Resources Coming Soon'));
 });
 
+app.get('/support', (req, res) => {
+  if (!req.session.isPatron) return res.redirect('/');
+  res.send(generateSimplePage('Support', '💬 Support Contact Form Coming Soon'));
+});
+
+app.get('/account', (req, res) => {
+  if (!req.session.isPatron) return res.redirect('/');
+  res.send(generateSimplePage('My Account', '⚙️ Account Details Area Coming Soon'));
+});
 
 app.listen(PORT, () => {
   console.log(`Portal running on port ${PORT}`);
