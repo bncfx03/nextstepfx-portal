@@ -173,6 +173,49 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/courses', (req, res) => {
+  if (!req.session.isPatron) return res.redirect('/');
+  res.send(`
+    <html>
+    <head>
+      <title>Courses | NextStepFX</title>
+      <style>
+        body { font-family: sans-serif; padding: 40px; background: #fff; color: #000; text-align: center; }
+        a { display: inline-block; margin-top: 20px; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        a:hover { background: #71e9df; color: #000; }
+      </style>
+    </head>
+    <body>
+      <h1>📚 Courses</h1>
+      <p>This is where your video lessons will go.</p>
+      <a href="/">← Back to Dashboard</a>
+    </body>
+    </html>
+  `);
+});
+
+app.get('/downloads', (req, res) => {
+  if (!req.session.isPatron) return res.redirect('/');
+  res.send(`
+    <html>
+    <head>
+      <title>Downloads | NextStepFX</title>
+      <style>
+        body { font-family: sans-serif; padding: 40px; background: #fff; color: #000; text-align: center; }
+        a { display: inline-block; margin-top: 20px; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        a:hover { background: #71e9df; color: #000; }
+      </style>
+    </head>
+    <body>
+      <h1>📥 Downloads</h1>
+      <p>Place your strategy PDFs, trading tools, or bonus content here.</p>
+      <a href="/">← Back to Dashboard</a>
+    </body>
+    </html>
+  `);
+});
+
+
 app.listen(PORT, () => {
   console.log(`Portal running on port ${PORT}`);
 });
