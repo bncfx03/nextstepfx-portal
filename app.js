@@ -125,8 +125,8 @@ const portalHTML = `
   <h1>Welcome back, trader!</h1>
 
   <div class="dashboard">
-    <a href="#" class="card">📚 Courses</a>
-    <a href="#" class="card">📥 Downloads</a>
+    <a href="/courses" class="card">📚 Courses</a>
+    <a href="/downloads" class="card">📥 Downloads</a>
     <a href="#" class="card">💬 Support</a>
     <a href="#" class="card">⚙️ My Account</a>
   </div>
