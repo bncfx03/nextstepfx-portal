@@ -10,7 +10,7 @@ const getPatreonAuthURL = () => {
     response_type: 'code',
     client_id: CLIENT_ID,
     redirect_uri: REDIRECT_URI,
-    scope: 'identity identity.memberships identity.email'
+scope: 'identity identity.memberships'
   });
   return `https://www.patreon.com/oauth2/authorize?${params.toString()}`;
 };
