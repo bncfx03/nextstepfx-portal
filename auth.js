@@ -16,17 +16,23 @@ scope: 'identity identity.memberships'
 };
 
 const getPatreonUserData = async (code) => {
-  const tokenResponse = await axios.post('https://www.patreon.com/api/oauth2/token', querystring.stringify({
-    code,
-    grant_type: 'authorization_code',
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    redirect_uri: REDIRECT_URI
-  }), {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  });
+const payload = new URLSearchParams({
+  code,
+  grant_type: 'authorization_code',
+  client_id: CLIENT_ID,
+  client_secret: CLIENT_SECRET,
+  redirect_uri: REDIRECT_URI
+});
+
+const tokenResponse = await axios({
+  method: 'post',
+  url: 'https://www.patreon.com/api/oauth2/token',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  data: payload.toString()
+});
+
 
   const { access_token } = tokenResponse.data;
 
