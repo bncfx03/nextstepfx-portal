@@ -67,30 +67,52 @@ const portalHTML = `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome | NextStepFX Academy</title>
+  <title>NextStepFX Academy Portal</title>
   <style>
     body {
       background-color: #ffffff;
       color: #000000;
-      font-family: sans-serif;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-      padding-top: 60px;
+      padding: 30px;
     }
     img {
       width: 150px;
       margin-bottom: 20px;
     }
+    h1 {
+      margin-bottom: 40px;
+    }
     .dashboard {
-      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 30px;
+    }
+    .card {
+      background: #71e9df;
+      padding: 20px;
+      border-radius: 10px;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .card:hover {
+      background: #000;
+      color: #fff;
     }
     a.logout {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 40px;
       background: #000;
       color: #fff;
       padding: 10px 20px;
       text-decoration: none;
       border-radius: 5px;
+      transition: 0.3s;
     }
     a.logout:hover {
       background: #71e9df;
@@ -101,14 +123,19 @@ const portalHTML = `
 <body>
   <img src="/logo.png" alt="NextStepFX Logo">
   <h1>Welcome back, trader!</h1>
+
   <div class="dashboard">
-    <p>This is your private academy portal.</p>
-    <p>[Placeholder for videos, downloads, or lessons]</p>
+    <a href="#" class="card">📚 Courses</a>
+    <a href="#" class="card">📥 Downloads</a>
+    <a href="#" class="card">💬 Support</a>
+    <a href="#" class="card">⚙️ My Account</a>
   </div>
+
   <a href="/logout" class="logout">Logout</a>
 </body>
 </html>
 `;
+
 
 app.get('/', (req, res) => {
   if (req.session.isPatron) {
