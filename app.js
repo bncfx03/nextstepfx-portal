@@ -37,17 +37,20 @@ body {
       margin-bottom: 40px;
     }
     a.login {
-      background: #71e9df;
-      padding: 12px 24px;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-    a.login:hover {
-      background: #ffffff;
-    }
+  display: inline-block;
+  margin-top: 20px;
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+a.login:hover {
+  background: #71e9df;
+  color: #000;
+}
   </style>
 </head>
 <body>
