@@ -212,9 +212,33 @@ app.get('/support', (req, res) => {
 });
 
 app.get('/account', (req, res) => {
-  if (!req.session.isPatron) return res.redirect('/');
-  res.send(generateSimplePage('My Account', '⚙️ Account Details Area Coming Soon'));
+  if (!req.session.isPatron || !req.session.user) return res.redirect('/');
+
+  const { fullName, email, tier, patronStatus } = req.session.user;
+
+  res.send(`
+    <html>
+    <head>
+      <title>My Account | NextStepFXAcademy</title>
+      <style>
+        body { font-family: sans-serif; padding: 40px; background: #ffffff; color: #000; text-align: center; }
+        .info { margin-bottom: 20px; }
+        a { display: inline-block; margin-top: 30px; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        a:hover { background: #71e9df; color: #000; }
+      </style>
+    </head>
+    <body>
+      <h1>⚙️ My Account</h1>
+      <div class="info"><strong>Name:</strong> ${fullName}</div>
+      <div class="info"><strong>Email:</strong> ${email}</div>
+      <div class="info"><strong>Membership Tier:</strong> ${tier}</div>
+      <div class="info"><strong>Status:</strong> ${patronStatus}</div>
+      <a href="/">← Back to Dashboard</a>
+    </body>
+    </html>
+  `);
 });
+
 
 app.listen(PORT, () => {
   console.log(`Portal running on port ${PORT}`);
