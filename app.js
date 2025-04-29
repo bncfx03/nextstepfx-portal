@@ -152,10 +152,16 @@ app.get('/callback', async (req, res) => {
   if (!code) return res.send('Missing code.');
 
   try {
-    const isPatron = await auth.checkPatreonMembership(code);
-    req.session.isPatron = isPatron;
-
-    if (isPatron) {
+    const userData = await auth.getPatreonUserData(code);
+    
+    if (userData.isPatron) {
+      req.session.isPatron = true;
+      req.session.user = {
+        fullName: userData.fullName,
+        email: userData.email,
+        tier: userData.tierName,
+        patronStatus: userData.patronStatus
+      };
       res.redirect('/');
     } else {
       res.send(accessDeniedHTML);
@@ -165,6 +171,7 @@ app.get('/callback', async (req, res) => {
     res.send('Authentication failed.');
   }
 });
+
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
