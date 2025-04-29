@@ -167,9 +167,9 @@ app.get('/callback', async (req, res) => {
       res.send(accessDeniedHTML);
     }
   } catch (error) {
-    console.error(error);
-    res.send('Authentication failed.');
-  }
+  console.error(error.response?.data || error.message);
+  res.send('Authentication failed: ' + (error.response?.data.error_description || error.message));
+}
 });
 
 
